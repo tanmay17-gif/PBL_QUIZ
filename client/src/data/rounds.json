@@ -1,0 +1,105 @@
+[
+  {
+    "id": 1, "type": "memory", "chapter": "CHAPTER I — REMEMBER THE SHELF",
+    "title": "Book Memory", "points": 100, "timeLimit": 20, "memorizeTime": 12,
+    "memorizeIds": ["alchemist", "1984", "sapiens", "atomic-habits", "little-prince", "mockingbird"],
+    "question": "Which book was NOT on the shelf?",
+    "options": ["1984", "Sapiens", "The Hobbit", "The Alchemist"],
+    "correctAnswer": "The Hobbit",
+    "discoveryId": "hobbit",
+    "hostNote": "Show 6 cards for ~12s, then hide. Observation beats reading."
+  },
+  {
+    "id": 2, "type": "memory-author", "chapter": "CHAPTER II — WHO WROTE IT?",
+    "title": "Memory + Author", "points": 100, "timeLimit": 20, "memorizeTime": 12,
+    "memorizeIds": ["harry-potter-1", "hobbit", "pride-prejudice", "gatsby"],
+    "question": "Who wrote 'The Hobbit'?",
+    "options": ["J.K. Rowling", "J.R.R. Tolkien", "Jane Austen", "F. Scott Fitzgerald"],
+    "correctAnswer": "J.R.R. Tolkien",
+    "discoveryId": "hobbit",
+    "hostNote": "Same shelf, new question: author recall."
+  },
+  {
+    "id": 3, "type": "spotter", "chapter": "CHAPTER III — BOOK SPOTTER",
+    "title": "Book Spotter", "points": 150, "timeLimit": 25,
+    "shelfIds": ["alchemist", "1984", "sapiens", "atomic-habits", "little-prince", "mockingbird", "harry-potter-1", "hobbit", "pride-prejudice", "gatsby", "kite-runner", "educated"],
+    "question": "Find the book with the YELLOW cover. Tap its title.",
+    "clue": "Look for mustard / yellow.",
+    "options": ["Sapiens", "1984", "The Great Gatsby", "Educated"],
+    "correctAnswer": "Sapiens",
+    "discoveryId": "sapiens",
+    "hostNote": "Projector shows full shelf. Phones show 4 options."
+  },
+  {
+    "id": 4, "type": "spotter", "chapter": "CHAPTER IV — SHARP EYES",
+    "title": "Book Spotter 2.0", "points": 150, "timeLimit": 25,
+    "shelfIds": ["alchemist", "1984", "sapiens", "atomic-habits", "little-prince", "mockingbird", "harry-potter-1", "hobbit", "pride-prejudice", "gatsby", "silent-patient", "diary-anne-frank"],
+    "question": "Find the book first published BEFORE 1900. Tap its title.",
+    "clue": "Only one shelf book is from the 1800s.",
+    "options": ["Pride and Prejudice", "1984", "Sapiens", "The Silent Patient"],
+    "correctAnswer": "Pride and Prejudice",
+    "discoveryId": "pride-prejudice",
+    "hostNote": "Tests year observation, not deep knowledge."
+  },
+  {
+    "id": 5, "type": "mystery", "chapter": "CHAPTER V — MYSTERY BOX",
+    "title": "Mystery Book Box", "points": 200, "timeLimit": 25,
+    "boxes": ["MYSTERY 01", "MYSTERY 02", "MYSTERY 03", "MYSTERY 04", "MYSTERY 05", "MYSTERY 06"],
+    "clues": ["FICTION", "20TH CENTURY", "INTERNATIONALLY FAMOUS"],
+    "question": "The mystery book is: FICTION • 20TH CENTURY • INTERNATIONALLY FAMOUS. Which is it?",
+    "options": ["The Kite Runner", "The Great Gatsby", "Educated", "Sapiens"],
+    "correctAnswer": "The Kite Runner",
+    "discoveryId": "kite-runner",
+    "hostNote": "Students pick a box for fun (any box), then answer the same clue question."
+  },
+  {
+    "id": 6, "type": "mystery-risk", "chapter": "CHAPTER VI — RISK & REWARD",
+    "title": "Mystery + Risk", "points": 200, "timeLimit": 25, "riskPoints": 400, "riskPenalty": -100,
+    "clues": ["MEMOIR", "21ST CENTURY", "SELF-MADE SCHOLAR"],
+    "question": "MEMOIR • 21ST CENTURY • SELF-MADE SCHOLAR. Which book? Choose SAFE or RISK first.",
+    "options": ["Educated", "The Diary of a Young Girl", "Ikigai", "Norwegian Wood"],
+    "correctAnswer": "Educated",
+    "discoveryId": "educated",
+    "hostNote": "SAFE = 200 pts if right, 0 if wrong. RISK = 400 if right, -100 if wrong."
+  },
+  {
+    "id": 7, "type": "reaction", "chapter": "CHAPTER VII — QUICK GLANCE",
+    "title": "Book Reaction", "points": 150, "timeLimit": 15, "flashTime": 3,
+    "flashIds": ["silent-patient"],
+    "question": "What colour was the spine of the flashed book?",
+    "options": ["Ink Black", "Terracotta", "Mustard", "Sage"],
+    "correctAnswer": "Ink Black",
+    "discoveryId": "silent-patient",
+    "hostNote": "Flash cover 3s, hide, ask."
+  },
+  {
+    "id": 8, "type": "reaction", "chapter": "CHAPTER VIII — SHARPER GLANCE",
+    "title": "Book Reaction 2.0", "points": 150, "timeLimit": 15, "flashTime": 3,
+    "flashIds": ["little-prince", "1984", "gatsby"],
+    "question": "How many books were flashed on the shelf?",
+    "options": ["2", "3", "4", "5"],
+    "correctAnswer": "3",
+    "discoveryId": "little-prince",
+    "hostNote": "Flash 3 books, ask count + symbol follow-up in host patter."
+  },
+  {
+    "id": 9, "type": "puzzle", "chapter": "CHAPTER IX — THE SHELF PUZZLE",
+    "title": "Book Puzzle", "points": 250, "timeLimit": 30,
+    "puzzle": { "cards": [{ "code": "A", "id": "1984" }, { "code": "B", "id": "alchemist" }, { "code": "C", "id": "atomic-habits" }, { "code": "D", "id": "psychology-of-money" }], "rules": ["Book A comes before Book B.", "Book C must be after Book A.", "Book D sits between Book B and Book C."] },
+    "question": "Shelve all four books using the clues. Which arrangement fits every rule?",
+    "options": ["A → B → D → C", "B → A → D → C", "A → D → B → C", "A → B → C → D"],
+    "correctAnswer": "A → B → D → C",
+    "discoveryId": "1984",
+    "hostNote": "Logic, not literature. Arrange visually."
+  },
+  {
+    "id": 10, "type": "final", "chapter": "CHAPTER X — THE FINAL STACK",
+    "title": "Final Library Challenge", "points": 500, "timeLimit": 30,
+    "memorizeIds": ["pride-prejudice", "diary-anne-frank", "norwegian-wood", "kite-runner"],
+    "question": "Which of these was published FIRST? (Oldest book wins)",
+    "options": ["Pride and Prejudice", "Norwegian Wood", "The Kite Runner", "Educated"],
+    "correctAnswer": "Pride and Prejudice",
+    "discoveryId": "pride-prejudice",
+    "hostNote": "Finale: memory + years + logic. 500 pts. Dramatic countdown."
+  }
+]

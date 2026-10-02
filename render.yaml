@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: library-game
+    runtime: node
+    plan: free
+    buildCommand: npm --prefix server install && npm --prefix client install && npm --prefix client run build
+    startCommand: npm --prefix server start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.21.0
+      - key: ADMIN_CODE
+        generateValue: true
+      # Optional after first deploy (same-origin serving works without it):
+      # - key: CLIENT_URL
+      #   sync: false
