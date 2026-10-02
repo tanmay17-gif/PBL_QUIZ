@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import QRCode from 'react-qr-code';
+import React, { useEffect, useState } from 'react';
 import { socket } from '../socket.js';
 import books from '../data/books.json';
 import { Cover, Tile, PCard, OptionStrip, Slots, TimerLine, RankingWall } from '../components/ui.jsx';
@@ -32,7 +31,6 @@ export default function Main() {
     }
   }, [state?.roundIndex, state?.phase]);
 
-  const joinUrl = useMemo(() => `${window.location.origin}/play?code=BOOK26`, []);
   if (!state) return <div className="stage"><div className="lbl">Opening the library…</div></div>;
   const r = state.round;
 
@@ -67,7 +65,7 @@ export default function Main() {
           </div>
           <div>
             <div className="lbl">Scan to join</div>
-            <div style={{ marginTop: 10 }}><span className="qr"><QRCode value={joinUrl} size={236} /></span></div>
+            <div style={{ marginTop: 10 }}><span className="qr"><img src="/join-qr.png" alt="Scan to join the game" width="236" height="236" style={{ display: 'block' }} /></span></div>
             <div className="lbl" style={{ marginTop: 16 }}>Game code</div>
             <div className="game-code">BOOK26</div>
             <hr className="rule" />

@@ -7,5 +7,18 @@
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "build": "npm --prefix client run build"
-  }
+  },
+  "description": "Three screens. No projector page — plain Chrome on `/` IS the event screen.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanmay17-gif/PBL_QUIZ.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tanmay17-gif/PBL_QUIZ/issues"
+  },
+  "homepage": "https://github.com/tanmay17-gif/PBL_QUIZ#readme"
 }
