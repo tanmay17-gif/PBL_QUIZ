@@ -71,7 +71,7 @@ export default function Main() {
             <hr className="rule" />
             <div className="lbl lbl--olive">Arriving now</div>
             <div className="slips">
-              {state.players.slice(0, 18).map((p, i) => (
+              {(state.players || []).slice(0, 18).map((p, i) => (
                 <span key={p.name} className="slip" style={{ animationDelay: `${Math.min(i, 10) * 50}ms` }}>{p.name}</span>
               ))}
             </div>
@@ -91,8 +91,8 @@ export default function Main() {
       )}
 
       {state.phase === 'round-intro' && r && (
-        <div className="fade" style={{ padding: '5vh 0' }}>
-          <div className="chap">
+        <div className="fade" style={{ padding: '5vh 0', textAlign: 'center' }}>
+          <div className="chap" style={{ textAlign: 'left', maxWidth: 900, margin: '0 auto' }}>
             <div className="chap-num">{String(r.id).padStart(2, '0')}</div>
             <div>
               <div className="lbl lbl--blood">{r.chapter}</div>
@@ -113,12 +113,12 @@ export default function Main() {
             <div className="serif" style={{ fontWeight: 800, fontSize: 'clamp(34px,4vw,64px)' }}>Study the shelf</div>
             {memIds.length <= 1 ? (
               <div style={{ maxWidth: 380, margin: '14px auto' }}>
-                <div className="tiles tiles--fit" style={{ height: 320, gridTemplateRows: 'minmax(0,1fr)' }}>
+                <div className="tiles tiles--fit" style={{ height: 340, gridTemplateRows: 'minmax(0,1fr)' }}>
                   <Tile book={byId[memIds[0]]} />
                 </div>
               </div>
             ) : (
-              <div className="tiles tiles--fit" style={{ height: 'calc(100vh - 480px)', minHeight: 300, marginTop: 14, gridTemplateRows: `repeat(${memRows}, minmax(0,1fr))` }}>
+              <div className="tiles tiles--fit" style={{ height: 'calc(100vh - 430px)', minHeight: 340, marginTop: 14, gridTemplateRows: `repeat(${memRows}, minmax(0,1fr))` }}>
                 {memIds.map((id, i) => <Tile key={id} book={byId[id]} delay={i * 60} />)}
               </div>
             )}
@@ -128,7 +128,7 @@ export default function Main() {
       })()}
 
       {state.phase === 'question' && r && (
-        <div>
+        <div className={(r.shelfIds?.length || 0) > 6 ? 'qdense' : undefined}>
           <div className="chap">
             <div className="chap-num">{String(r.id).padStart(2, '0')}</div>
             <div>
@@ -139,15 +139,18 @@ export default function Main() {
           </div>
           <div className="ask">{r.question}</div>
           {r.clues && <div className="clue-line">Clues · {r.clues.join(' — ')}</div>}
+          {r.type === 'mystery-risk' && (
+            <div className="clue-line" style={{ marginTop: 6 }}>On your phone first pick SAFE (200 pts) or RISK (400 pts, −100 if wrong) — then answer</div>
+          )}
           {r.puzzle && <div className="clue-line" style={{ marginTop: 6 }}>Clues · {r.puzzle.rules.join(' — ')}</div>}
           {r.puzzle && (
             <div>
               <div className="puzzle-cards">
-                {r.puzzle.cards.map((c, i) => <PCard key={c.code} book={byId[c.id]} code={c.code} delay={i * 80} />)}
+                {(r.puzzle.cards || []).map((c, i) => <PCard key={c.code} book={byId[c.id]} code={c.code} delay={i * 80} />)}
               </div>
               <Slots size={4} />
               <div className="strips">
-                {r.options.map((o, i) => (
+                {(r.options || []).map((o, i) => (
                   <div key={o} className="strip">
                     <span className="n">{LETTERS[i] || (i + 1)}</span>
                     <OptionStrip option={o} cards={r.puzzle.cards} library={byId} />
@@ -158,20 +161,21 @@ export default function Main() {
           )}
           {!r.puzzle && r.shelfIds && (() => {
             const rows = Math.max(1, Math.ceil(r.shelfIds.length / 2));
+            const dense = r.shelfIds.length > 6;
             return (
-              <div className="tiles tiles--fit" style={{ height: 'calc(100vh - 560px)', minHeight: 420, marginTop: 14, gridTemplateRows: `repeat(${rows}, minmax(0,1fr))` }}>
-                {r.shelfIds.map((id, i) => <Tile key={id} book={byId[id]} showYear delay={i * 35} />)}
+              <div className="tiles tiles--fit" style={{ height: dense ? 'calc(100vh - 500px)' : 'calc(100vh - 470px)', minHeight: dense ? 360 : 320, marginTop: 12, gridTemplateRows: `repeat(${rows}, minmax(0,1fr))` }}>
+                {r.shelfIds.map((id, i) => <Tile key={id} book={byId[id]} showYear dense={dense} delay={i * 35} />)}
               </div>
             );
           })()}
           {!r.puzzle && (r.type === 'mystery' || r.type === 'mystery-risk') && (
             <div className="drawers">
-              {r.boxes.map((b, i) => <div key={b} className="drawer" style={{ animationDelay: `${i * 60}ms` }}><b>{String(i + 1).padStart(2, '0')}</b>{b}</div>)}
+              {(r.boxes || []).map((b, i) => <div key={b} className="drawer" style={{ animationDelay: `${i * 60}ms` }}><b>{String(i + 1).padStart(2, '0')}</b>{b}</div>)}
             </div>
           )}
           {!r.puzzle && (
           <div className="choices">
-            {r.options.map((o, i) => (
+            {(r.options || []).map((o, i) => (
               <div key={o} className="choice"><span className="n">{LETTERS[i] || (i + 1)}</span><span>{o}</span></div>
             ))}
           </div>
@@ -188,7 +192,7 @@ export default function Main() {
             <div>
               <Slots filled={(state.stats?.correctAnswer || '').split('→').map((s) => s.trim())} size={4} />
               <div className="strips">
-                {r.options.map((o, i) => {
+                {(r.options || []).map((o, i) => {
                   const hit = o === state.stats?.correctAnswer;
                   return (
                     <div key={o} className={`strip ${hit ? 'hit' : ''}`}>
@@ -202,7 +206,7 @@ export default function Main() {
             </div>
           ) : (
           <div className="choices">
-            {r.options.map((o, i) => {
+            {(r.options || []).map((o, i) => {
               const hit = o === state.stats?.correctAnswer;
               return (
                 <div key={o} className={`choice ${hit ? 'hit' : ''}`}>
@@ -239,7 +243,7 @@ export default function Main() {
           <div className="lbl lbl--blood">Closing page</div>
           <div className="serif" style={{ fontWeight: 800, fontSize: 'clamp(52px,7vw,104px)', lineHeight: .95 }}>Library<br />Champions</div>
           <div className="wall">
-            {state.players.slice(0, 3).map((p, i) => (
+            {(state.players || []).slice(0, 3).map((p, i) => (
               <div className={`wall-row ${i === 0 ? 'first' : ''}`} key={p.name}>
                 <div className="rk">{String(i + 1).padStart(2, '0')}</div>
                 <div className="nm">{p.name}</div>

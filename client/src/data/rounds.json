@@ -55,6 +55,7 @@
   {
     "id": 6, "type": "mystery-risk", "chapter": "CHAPTER VI — RISK & REWARD",
     "title": "Mystery + Risk", "points": 200, "timeLimit": 25, "riskPoints": 400, "riskPenalty": -100,
+    "boxes": ["MYSTERY 01", "MYSTERY 02", "MYSTERY 03", "MYSTERY 04", "MYSTERY 05", "MYSTERY 06"],
     "clues": ["MEMOIR", "21ST CENTURY", "SELF-MADE SCHOLAR"],
     "question": "MEMOIR • 21ST CENTURY • SELF-MADE SCHOLAR. Which book? Choose SAFE or RISK first.",
     "options": ["Educated", "The Diary of a Young Girl", "Ikigai", "Norwegian Wood"],

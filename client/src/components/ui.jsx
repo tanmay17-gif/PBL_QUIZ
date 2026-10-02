@@ -78,7 +78,7 @@ export function ShelfBook({ book, index }) {
 
 /** Uniform shelf tile: identical cell, fixed image area, aligned type.
  *  Real cover when available, monogram fallback otherwise. */
-export function Tile({ book, showYear, delay }) {
+export function Tile({ book, showYear, delay, dense }) {
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => { setFailed(false); setAttempt(0); }, [book?.id]);
@@ -88,7 +88,7 @@ export function Tile({ book, showYear, delay }) {
     ? (attempt === 0 ? base : `${base}?retry=${attempt}`)
     : null;
   return (
-    <div className="tile" style={delay ? { animationDelay: `${delay}ms` } : undefined}>
+    <div className={`tile${dense ? ' tile--dense' : ''}`} style={delay ? { animationDelay: `${delay}ms` } : undefined}>
       <div className="tile-art">
         {src ? (
           <img
@@ -122,7 +122,7 @@ function Mini({ book, code }) {
 
 /** An answer option rendered as a shelf strip: [book]→[book]→[book]→[book]. */
 export function OptionStrip({ option, cards, library }) {
-  const codes = option.split('→').map((s) => s.trim()).filter(Boolean);
+  const codes = (option || '').split('→').map((s) => s.trim()).filter(Boolean);
   return (
     <span className="strip-books">
       {codes.map((code, i) => {

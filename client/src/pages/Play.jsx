@@ -203,7 +203,7 @@ export default function Play() {
             <div style={{ marginTop: 10 }}>
               <div className="lbl lbl--olive">Clues · {r.puzzle.rules.join(' — ')}</div>
               <div className="puzzle-cards">
-                {r.puzzle.cards.map((c) => <PCard key={c.code} book={byId[c.id]} code={c.code} />)}
+                {(r.puzzle.cards || []).map((c) => <PCard key={c.code} book={byId[c.id]} code={c.code} />)}
               </div>
               <Slots size={4} />
             </div>
@@ -212,7 +212,7 @@ export default function Play() {
             <>
               {r.puzzle ? (
                 <div className="strips">
-                  {r.options.map((o, i) => (
+                  {(r.options || []).map((o, i) => (
                     <button key={o} disabled={!state.timer.running} className={`strip ${pending === o ? 'sel' : ''}`} onClick={() => setPending(o)}>
                       <span className="n">{LETTERS[i] || (i + 1)}</span>
                       <OptionStrip option={o} cards={r.puzzle.cards} library={byId} />
@@ -221,7 +221,7 @@ export default function Play() {
                 </div>
               ) : (
               <div className="picks">
-                {r.options.map((o, i) => (
+                {(r.options || []).map((o, i) => (
                   <button key={o} disabled={!state.timer.running} className={`pick ${pending === o ? 'sel' : ''}`} onClick={() => setPending(o)}>
                     <span className="pk-n">{LETTERS[i] || (i + 1)}</span><span>{o}</span>
                   </button>
@@ -250,7 +250,7 @@ export default function Play() {
           <div className="serif" style={{ fontWeight: 800, fontSize: 30 }}>Correct: {state.stats?.correctAnswer}</div>
           {r.puzzle && (
             <div className="strips">
-              {r.options.map((o, i) => {
+              {(r.options || []).map((o, i) => {
                 const hit = o === state.stats?.correctAnswer;
                 const miss = !hit && lockedChoice === o;
                 return (
@@ -287,7 +287,7 @@ export default function Play() {
           <div className="card" style={{ border: '1px solid var(--line-dark)', background: 'var(--card)', padding: 12, margin: '10px 0', textAlign: 'center', borderRadius: 2 }}>
             YOUR SCORE · <b className="mono-num">{myRank?.score ?? 0}</b> · <b className="mono-num">#{myRank?.pos ?? '—'}</b>
           </div>
-          {[...state.players].sort((a, b) => b.score - a.score).slice(0, 5).map((p, i) => (
+          {[...(state.players || [])].sort((a, b) => b.score - a.score).slice(0, 5).map((p, i) => (
             <div key={p.name} style={{ display: 'flex', gap: 12, alignItems: 'baseline', padding: '9px 2px', borderBottom: '1px solid var(--line)' }}>
               <span className="serif" style={{ fontStyle: 'italic', color: i === 0 ? 'var(--oxblood)' : 'var(--ink-soft)', fontSize: 22 }}>{String(i + 1).padStart(2, '0')}</span>
               <span style={{ fontWeight: 700 }}>{p.name}</span>
@@ -301,7 +301,7 @@ export default function Play() {
         <div style={{ textAlign: 'center', marginTop: 22 }}>
           <div className="lbl lbl--blood">Closing page</div>
           <div className="serif" style={{ fontWeight: 800, fontSize: 40 }}>Library Champions</div>
-          {state.players.slice(0, 3).map((p, i) => (
+          {(state.players || []).slice(0, 3).map((p, i) => (
             <div key={p.name} style={{ padding: 4 }}>{['1st', '2nd', '3rd'][i]} · <b>{p.name}</b> — <b className="mono-num">{p.score}</b></div>
           ))}
           <div className="small" style={{ marginTop: 8 }}>Thanks for playing — keep reading.</div>

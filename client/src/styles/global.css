@@ -272,6 +272,18 @@ button.strip.sel{border:2px solid var(--oxblood);padding:9px 13px;transform:tran
 .mini-code{position:absolute;left:0;top:0;background:var(--ink);color:#F4EDDE;font-size:9px;font-weight:800;padding:1px 5px}
 .strip .votes{margin-left:auto;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--ink-soft);flex:none}
 
+/* compact question mode for 12-book shelves: everything fits 1080p */
+.qdense .chap-num{font-size:clamp(40px,4.5vw,64px)}
+.qdense .chap h2{font-size:clamp(26px,2.8vw,44px)}
+.qdense .chap-sub{font-size:11px}
+.qdense .ask{font-size:clamp(22px,2.2vw,34px);margin:8px 0 2px}
+.qdense .clue-line{font-size:11px}
+.qdense .choice{font-size:clamp(15px,1.4vw,20px);padding:12px 16px}
+.qdense .timer-big{font-size:clamp(40px,4vw,64px)}
+.tile--dense{padding:6px 10px;gap:6px}
+.tile--dense .tile-tt{font-size:14px;min-height:2.4em}
+.tile--dense .tile-meta{font-size:10.5px}
+
 /* lettered answer options with spine accent */
 .choice{border-left:6px solid var(--line-dark)}
 .choice:nth-child(4n+1){border-left-color:var(--oxblood)}
